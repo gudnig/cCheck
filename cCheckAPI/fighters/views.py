@@ -23,6 +23,16 @@ from fighters.permissions import IsOwnerOrReadOnly
 # Fix authentication permissions
 
 
+class GenerateTokens(APIView):
+	permission_classes = (permissions.IsAuthenticated,)
+	def get(self, request):
+		from django.contrib.auth.models import User
+		from rest_framework.authtoken.models import Token
+
+		for user in User.objects.all():
+			Token.objects.get_or_create(user=user)
+		return Response("Success", status=status.HTTP_200_OK)
+
 class FighterList(generics.ListCreateAPIView):
 	permission_classes = (permissions.IsAuthenticated,)
 	queryset = Fighter.objects.all()
@@ -38,6 +48,7 @@ class UserList(generics.ListAPIView):
 	permission_classes = (permissions.IsAuthenticated,)
 	queryset = User.objects.all()
 	serializer_class = UserSerializer
+
 
 class UserDetail(generics.RetrieveAPIView):
 	permission_classes = (permissions.IsAuthenticated,)
