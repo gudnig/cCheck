@@ -5,12 +5,15 @@ version 0.11.1.
 
 ## Build & development
 
-to set up flask api:
+to set up api:
 
-from server directory:
-virtualenv flask
-flask/bin/pip install django
-flask/bin/pip install djangorestframework
+from cCheck directory:
+pyvenv venv (or virtualenv but python3 is better)
+source venv/bin/activate
+pip install django
+pip install djangorestframework
+
+then run api with python manage.py runserver
 
 Run `grunt` for building and `grunt serve` for preview.
 
