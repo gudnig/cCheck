@@ -8,10 +8,10 @@
  * Controller of the cCheckApp
  */
 angular.module('cCheckApp')
-  .controller('MainCtrl', function ($scope) {
+  .controller('MainCtrl',[ '$scope', function ($scope) {
     $scope.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
     ];
-  });
+  }]);

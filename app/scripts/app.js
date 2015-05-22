@@ -34,4 +34,4 @@ angular
       .otherwise({
         redirectTo: '/login'
       });
-  });
+  }).constant('API_URL', 'http://localhost:8000/');
