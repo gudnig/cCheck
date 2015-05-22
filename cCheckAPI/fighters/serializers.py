@@ -4,6 +4,7 @@ from fighters.models import Fighter, PracticeSession
 from django.contrib.auth.models import User
 
 class FighterSerializer(serializers.ModelSerializer):
+	user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all(), required = False)
 	class Meta:
 		model = Fighter
 		fields = ( 'id', 'name', 'status', 'created', 'user' )
