@@ -4,5 +4,5 @@ dist
 .sass-cache
 bower_components
 venv
-server/venv
 *.pyc
+*.sqlite3

@@ -13,4 +13,4 @@ class Fighter(models.Model):
 class PracticeSession(models.Model):
 	description = models.CharField(max_length=200, null=True)
 	date = models.DateField()
-	attendance = models.ManyToManyField(Fighter, related_name='attendance', null=True)
+	attendance = models.ManyToManyField(Fighter, related_name='attendance')
