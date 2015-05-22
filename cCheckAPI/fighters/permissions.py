@@ -3,7 +3,7 @@ from rest_framework import permissions
 class IsTrainerOrReadOnly(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
         # If trainer grant access
-        if request.user.fighter.status == "Þjálfari"
+        if request.user.fighter.status == "Þjálfari":
             return True
         # If owner grant access
         return obj.user == request.user

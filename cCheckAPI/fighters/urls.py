@@ -17,5 +17,5 @@ urlpatterns = [
 
 urlpatterns = format_suffix_patterns(urlpatterns)
 urlpatterns += [
-    url(r'^api-token-auth/', auth_views.obtain_auth_token)
+    url(r'^api-token-auth/', views.ObtainAuthToken.as_view())
 ]
