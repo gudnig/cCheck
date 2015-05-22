@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',    
     'rest_framework',
     'rest_framework.authtoken',
+    'corsheaders',
     'fighters',
 )
 
@@ -51,7 +52,12 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 )
+
+CORS_ORIGIN_WHITELIST = [
+    'localhost:9000',    
+]
 
 ROOT_URLCONF = 'cCheckAPI.urls'
 
