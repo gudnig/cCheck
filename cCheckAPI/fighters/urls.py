@@ -8,6 +8,7 @@ urlpatterns = [
 	url(r'^fighters/(?P<pk>[0-9]+)/$', views.FighterDetail.as_view()),
 	url(r'^users/$', views.UserList.as_view()),
 	url(r'^users/(?P<pk>[0-9]+)/$', views.UserDetail.as_view()),
+	url(r'^sessions/$', views.SessionList.as_view()),
 ]
 
 
