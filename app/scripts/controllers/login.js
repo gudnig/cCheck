@@ -8,10 +8,10 @@
  * Controller of the cCheckApp
  */
 angular.module('cCheckApp')
-  .controller('LoginCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'LOGGGINs',
-      'AngularJS',
-      'Karma'a
-    ];
-  });
+  .controller('LoginCtrl',['$scope', 'authService', function ($scope, authService) {
+  	$scope.user = "";
+  	$scope.pass = "";
+    $scope.login = function () {
+    	authService.login($scope.user, $scope.pass)
+    };
+  }]);

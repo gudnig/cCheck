@@ -8,16 +8,18 @@
  * Factory in the cCheckApp.
  */
 angular.module('cCheckApp')
-  .factory('authService', function () {
+  .factory('authService', ['$http', '$q', '$window', 'API_URL', function ($http, $q, $window, API_URL) {
     // Service logic
-    // ...
+    function login(user, pass) {
+      var deferred = $q.defer();
 
-    var meaningOfLife = 42;
+      $http.post(API_URL + 'api-token-auth/', {username: user, password: pass}).then(function(response){
+        console.log(response);
+      });
+    }
 
     // Public API here
     return {
-      someMethod: function () {
-        return meaningOfLife;
-      }
+      login: login
     };
-  });
+  }]);
