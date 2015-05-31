@@ -34,6 +34,10 @@ angular
       .when('/unauthorized', {
         templateUrl: 'views/unauthorized.html'        
       })
+      .when('/addTrainee', {
+        templateUrl: 'views/addtrainee.html',
+        controller: 'AddtraineeCtrl'
+      })
       .otherwise({
         redirectTo: '/login'
       });
@@ -87,7 +91,7 @@ angular
   .config(function ($httpProvider) {
     $httpProvider.interceptors.push('authInterceptor');
   })
-  .controller('NavController', ['$scope', '$location', 'authService', '$window', function($scope, $location, authService, $window) {
+  .controller('NavController', ['$scope', '$location', 'authService', function($scope, $location, authService) {
     $scope.isActive = function(viewLocation) {
       return viewLocation === $location.path();
     };
@@ -108,6 +112,5 @@ angular
         return authService.role() === 'Þjálfari';
       }
       return false;      
-    }    
-    console.log($scope.isTrainer());
+    };
   }]);

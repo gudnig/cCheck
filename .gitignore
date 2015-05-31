@@ -1,4 +1,5 @@
 node_modules
+/cCheckAPI/fighters/migrations
 dist
 .tmp
 .sass-cache

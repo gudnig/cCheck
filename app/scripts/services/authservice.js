@@ -56,12 +56,11 @@ angular.module('cCheckApp')
       if(user) {
         return user.status;
       }
-      return "guest"
+      return 'guest';
     }
 
     function init() {      
-      if ($window.sessionStorage.user != null) {
-
+      if ($window.sessionStorage.user !== null) {
           user = JSON.parse($window.sessionStorage.user);
           if( user !== null) {
             isLoggedIn = true;
