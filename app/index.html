@@ -45,8 +45,25 @@
 
              <ul ng-show="isTrainer()" class="nav navbar-nav">
               <li ng-class="{ active: isActive('/')}"><a href="#/">Home</a></li>
-              <li ng-class="{ active: isActive('/about')}"><a ng-href="#/about">About</a></li>             
-              <li ng-class="{ active: isActive('/addTrainee')}"><a ng-href="#/addTrainee">Nýr Bardagamaður</a></li>
+              <li ng-class="{ active: isActive('/about')}"><a ng-href="#/about">About</a></li>              
+              </li>
+              <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Bardagamenn <span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                  <li ng-class="{ active: isActive('/addTrainee')}">
+                    <a ng-href="#/addTrainee">
+                      <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                      Búa til
+                     </a>      
+                   </li>
+                   <li ng-class="{ active: isActive('/addTrainee')}">
+                    <a ng-href="#/addTrainee">
+                      <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                      Búa til
+                     </a>      
+                   </li>             
+                </ul>
+              </li>
               
             </ul>
 
@@ -69,18 +86,6 @@
       </div>
     </div>
 
-
-    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
-     <script>
-       !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
-       (A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
-       r=n.getElementsByTagName(g)[0],a.src=u,r.parentNode.insertBefore(a,r)
-       }(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-       ga('create', 'UA-XXXXX-X');
-       ga('send', 'pageview');
-    </script>
-
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
@@ -101,9 +106,9 @@
         <script src="scripts/controllers/about.js"></script>
         <script src="scripts/controllers/login.js"></script>        
         <script src="scripts/services/authservice.js"></script>
-        <script src="scripts/services/authinterceptor.js"></script>        
-        <script src="scripts/controllers/addtrainee.js"></script>        
+        <script src="scripts/services/authinterceptor.js"></script>                
         <script src="scripts/services/resources.js"></script>
+        <script src="scripts/controllers/fighters.js"></script>
         <!-- endbuild -->
 </body>
 </html>

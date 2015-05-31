@@ -11,12 +11,13 @@ angular.module('cCheckApp')
   .factory('authInterceptor',['$rootScope', '$q', '$window', '$location', function ($rootScope, $q, $window, $location) {
     // Service logic
     return {
-      request: function (config) {
-        console.log($window.sessionStorage.token);
-        config.headers = config.headers || {};
-        if($window.sessionStorage.token)
-          config.headers.Authorization =  'Token ' + $window.sessionStorage.token;
-        
+      request: function (config) {        
+        config.headers = config.headers || {};        
+        var user = JSON.parse(sessionStorage.getItem('user'));
+        console.log(user);
+        if(user) {          
+          config.headers.Authorization =  'Token ' + user.Token;
+        }        
         
         return config;
       },

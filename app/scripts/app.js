@@ -36,7 +36,7 @@ angular
       })
       .when('/addTrainee', {
         templateUrl: 'views/addtrainee.html',
-        controller: 'AddtraineeCtrl'
+        controller: 'FightersCtrl'
       })
       .otherwise({
         redirectTo: '/login'

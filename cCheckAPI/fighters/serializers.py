@@ -15,7 +15,7 @@ class UserSerializer(serializers.ModelSerializer):
 
 	class Meta:
 		model = User
-		fields = ('id', 'username', 'fighter',)
+		fields = ('id', 'username', 'email', 'fighter',)
 
 class PracticeSessionSerializer(serializers.ModelSerializer):
 	attendance = serializers.SlugRelatedField(

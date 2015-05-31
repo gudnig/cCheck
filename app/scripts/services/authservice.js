@@ -10,8 +10,9 @@
 angular.module('cCheckApp')
   .factory('authService', ['$http', '$q', '$window', 'API_URL', function ($http, $q, $window, API_URL) {
     // Service logic
-    var name = "", status = "", token = "";    
+    var user;   
     var isLoggedIn = false;
+
 
     function getUser() {
       return user;
@@ -24,13 +25,16 @@ angular.module('cCheckApp')
         username: username, 
         password: pass
       }).then(function(response){
-        $window.sessionStorage.status = response.data.status;
-        $window.sessionStorage.name = response.data.name;
-        $window.sessionStorage.token = response.data.token;
+        user =  {
+          Token: response.data.token,
+          Name: response.data.name,
+          Status: response.data.status
+        };
+        $window.sessionStorage.setItem('user', JSON.stringify(user));
         isLoggedIn = true;
 
         //console.log($window.sessionStorage.user); 
-        deferred.resolve(token);
+        deferred.resolve(user);
       }, 
       function(error) {
         deferred.reject(error);
@@ -39,37 +43,29 @@ angular.module('cCheckApp')
     }
 
     function logout() {
-      $window.sessionStorage.token = null;
-      $window.sessionStorage.status = null;
-      $window.sessionStorage.name = null;
-      user = null;
-      isLoggedIn = false;
-      return;
+      $window.sessionStorage.user = null      
+      user = null      
+      isLoggedIn = false;      
     }
 
     function loggedIn() {
       return isLoggedIn;
     }
 
-    function role() {
-      if(status !== "") {
-        return status;
+    function role() {      
+      if(isLoggedIn) {
+        return user.Status;
       }
       return 'guest';
     }
 
     function init() {      
-      if ($window.sessionStorage.token != null) {
-          token = $window.sessionStorage.token;
-          if( token !== null) {
-            isLoggedIn = true;
-          }          
-      }
-      if ($window.sessionStorage.status != null) {
-          status = $window.sessionStorage.status;      
-      }
-      if ($window.sessionStorage.name != null) {
-          name = $window.sessionStorage.name;                    
+      if ($window.sessionStorage.user) {        
+        user = JSON.parse($window.sessionStorage.getItem('user'));
+        if(user){          
+          console.log(user);
+          isLoggedIn = true;
+        }
       }
     }
     init();

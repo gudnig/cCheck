@@ -12,6 +12,12 @@ angular.module('cCheckApp')
     return {
       fighters: function () {
         return $resource(API_URL + 'fighters/:id');
+      },
+      users: function () {
+        return $resource(API_URL + 'users/:id');
+      },
+      sessions: function () {
+        return $resource(API_URL + 'sessions/:id');
       }
     };
   }]);
