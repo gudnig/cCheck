@@ -8,10 +8,8 @@
  * Controller of the cCheckApp
  */
 angular.module('cCheckApp')
-  .controller('AddtraineeCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-  });
+  .controller('AddtraineeCtrl',['$scope', 'resources', function ($scope, resources) {    
+    var entries = resources.fighters().query(function() {
+    	console.log(entries);
+  	}); //query() returns all the entries
+  }]);

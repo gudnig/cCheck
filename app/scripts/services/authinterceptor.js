@@ -12,12 +12,12 @@ angular.module('cCheckApp')
     // Service logic
     return {
       request: function (config) {
+        console.log($window.sessionStorage.token);
         config.headers = config.headers || {};
-        if ($window.sessionStorage.user) {
-          if($window.sessionStorage.user.token !== undefined) {
-            config.headers.Authorization =  'Token ' + $window.sessionStorage.user.token;
-          }
-        }
+        if($window.sessionStorage.token)
+          config.headers.Authorization =  'Token ' + $window.sessionStorage.token;
+        
+        
         return config;
       },
       response: function (response) {

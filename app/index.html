@@ -45,7 +45,8 @@
 
              <ul ng-show="isTrainer()" class="nav navbar-nav">
               <li ng-class="{ active: isActive('/')}"><a href="#/">Home</a></li>
-              <li ng-class="{ active: isActive('/about')}"><a ng-href="#/about">About</a></li>              
+              <li ng-class="{ active: isActive('/about')}"><a ng-href="#/about">About</a></li>             
+              <li ng-class="{ active: isActive('/addTrainee')}"><a ng-href="#/addTrainee">Nýr Bardagamaður</a></li>
               
             </ul>
 
@@ -101,7 +102,8 @@
         <script src="scripts/controllers/login.js"></script>        
         <script src="scripts/services/authservice.js"></script>
         <script src="scripts/services/authinterceptor.js"></script>        
-        <script src="scripts/controllers/addtrainee.js"></script>
+        <script src="scripts/controllers/addtrainee.js"></script>        
+        <script src="scripts/services/resources.js"></script>
         <!-- endbuild -->
 </body>
 </html>

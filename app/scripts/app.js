@@ -56,7 +56,7 @@ angular
     // routes that don't require authentication
     var skipAuth = ['/login', '/about'];
     // routes only for trainers
-    var trainersOnly = [];
+    var trainersOnly = ['/addTrainee'];
 
     // check if route exists in array
     function existsIn(route, array) {
@@ -66,7 +66,7 @@ angular
           result = true;
         }
       });
-      return result;
+        return result;
     }    
     $rootScope.$on('$routeChangeError', function(event, current, previous, eventObj) {
       if (eventObj.authenticated === false) {
@@ -90,6 +90,9 @@ angular
   }])
   .config(function ($httpProvider) {
     $httpProvider.interceptors.push('authInterceptor');
+  })
+  .config(function($resourceProvider) {
+    $resourceProvider.defaults.stripTrailingSlashes = false;
   })
   .controller('NavController', ['$scope', '$location', 'authService', function($scope, $location, authService) {
     $scope.isActive = function(viewLocation) {
