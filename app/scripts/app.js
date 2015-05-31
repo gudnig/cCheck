@@ -87,7 +87,7 @@ angular
   .config(function ($httpProvider) {
     $httpProvider.interceptors.push('authInterceptor');
   })
-  .controller('NavController', ['$scope', '$location', 'authService', function($scope, $location, authService) {
+  .controller('NavController', ['$scope', '$location', 'authService', '$window', function($scope, $location, authService, $window) {
     $scope.isActive = function(viewLocation) {
       return viewLocation === $location.path();
     };
@@ -103,4 +103,11 @@ angular
         return false;
       }
     };
+    $scope.isTrainer = function() {      
+      if(authService.loggedIn()) {        
+        return authService.role() === 'Þjálfari';
+      }
+      return false;      
+    }    
+    console.log($scope.isTrainer());
   }]);

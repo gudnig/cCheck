@@ -53,14 +53,20 @@ angular.module('cCheckApp')
     }
 
     function role() {
-      return user.status;
+      if(user) {
+        return user.status;
+      }
+      return "guest"
     }
 
-    function init() {
-        if ($window.sessionStorage.user) {
-            user = JSON.parse($window.sessionStorage.user);
+    function init() {      
+      if ($window.sessionStorage.user != null) {
+
+          user = JSON.parse($window.sessionStorage.user);
+          if( user !== null) {
             isLoggedIn = true;
-        }
+          }          
+      }
     }
     init();
 
