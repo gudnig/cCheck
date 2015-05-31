@@ -13,8 +13,10 @@ angular.module('cCheckApp')
     return {
       request: function (config) {
         config.headers = config.headers || {};
-        if ($window.sessionStorage.token) {
-          config.headers.Authorization =  $window.sessionStorage.token;
+        if ($window.sessionStorage.user) {
+          if($window.sessionStorage.user.token !== undefined) {
+            config.headers.Authorization =  'Token ' + $window.sessionStorage.user.token;
+          }
         }
         return config;
       },

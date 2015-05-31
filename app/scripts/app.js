@@ -17,11 +17,11 @@ angular
     'ngSanitize',
     'ngTouch'
   ])
-  .config(function ($routeProvider) {
+  .config(['$routeProvider', function ($routeProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
+        controller: 'MainCtrl'        
       })
       .when('/about', {
         templateUrl: 'views/about.html',
@@ -31,7 +31,76 @@ angular
         templateUrl: 'views/login.html',
         controller: 'LoginCtrl'
       })
+      .when('/unauthorized', {
+        templateUrl: 'views/unauthorized.html'        
+      })
       .otherwise({
         redirectTo: '/login'
       });
-  }).constant('API_URL', 'http://localhost:8000/');
+      /*
+      // Html 5 mode, need to fix rewrites to use
+      $locationProvider.html5Mode({
+        enabled: true,
+        requireBase: false
+      });
+      */
+  }])
+  .constant('API_URL', 'http://localhost:8000/')
+  .run(['$rootScope', '$location', 'authService', function($rootScope, $location, authService) {
+    // Route changes settings for authentication
+
+    // routes that don't require authentication
+    var skipAuth = ['/login', '/about'];
+    // routes only for trainers
+    var trainersOnly = [];
+
+    // check if route exists in array
+    function existsIn(route, array) {
+      var result = false;
+      array.forEach(function(entry) {                
+        if(entry.localeCompare(route) === 0) {          
+          result = true;
+        }
+      });
+      return result;
+    }    
+    $rootScope.$on('$routeChangeError', function(event, current, previous, eventObj) {
+      if (eventObj.authenticated === false) {
+        $location.path('/login');
+      }
+    });
+
+    $rootScope.$on('$routeChangeStart', function () {
+      var attemptRoute = $location.path();
+      
+      if(!existsIn(attemptRoute, skipAuth) && !authService.loggedIn())
+      {        
+        // if path requires authentication and user is not logged in
+        $location.path('/login');
+      }
+      else if(existsIn(attemptRoute, trainersOnly) && authService.role() !== 'Þjálfari')
+      {
+        $location.path('/unauthorized');
+      }
+    });
+  }])
+  .config(function ($httpProvider) {
+    $httpProvider.interceptors.push('authInterceptor');
+  })
+  .controller('NavController', ['$scope', '$location', 'authService', function($scope, $location, authService) {
+    $scope.isActive = function(viewLocation) {
+      return viewLocation === $location.path();
+    };
+    $scope.logout = function() { 
+      authService.logout(); 
+      $location.path('/login');
+    };
+    $scope.loggedIn = function() {      
+      if(authService.loggedIn()) {
+        return true;
+      }
+      else {
+        return false;
+      }
+    };
+  }]);
