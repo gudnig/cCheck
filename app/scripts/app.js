@@ -15,7 +15,8 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'ui.bootstrap'
   ])
   .config(['$routeProvider', function ($routeProvider) {
     $routeProvider
@@ -36,7 +37,11 @@ angular
       })
       .when('/addTrainee', {
         templateUrl: 'views/addtrainee.html',
-        controller: 'FightersCtrl'
+        controller: 'FightersCtr'
+      })
+      .when('/addSession', {
+        templateUrl: 'views/addsession.html',
+        controller: 'SessionsCtrl'
       })
       .otherwise({
         redirectTo: '/login'
@@ -94,6 +99,9 @@ angular
   .config(function($resourceProvider) {
     $resourceProvider.defaults.stripTrailingSlashes = false;
   })
+  .config(function (datepickerConfig) {
+      datepickerConfig.showButtonBar = false;
+    })
   .controller('NavController', ['$scope', '$location', 'authService', function($scope, $location, authService) {
     $scope.isActive = function(viewLocation) {
       return viewLocation === $location.path();

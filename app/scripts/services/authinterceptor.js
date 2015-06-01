@@ -13,8 +13,7 @@ angular.module('cCheckApp')
     return {
       request: function (config) {        
         config.headers = config.headers || {};        
-        var user = JSON.parse(sessionStorage.getItem('user'));
-        console.log(user);
+        var user = JSON.parse(sessionStorage.getItem('user'));        
         if(user) {          
           config.headers.Authorization =  'Token ' + user.Token;
         }        

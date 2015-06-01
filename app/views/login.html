@@ -1,17 +1,18 @@
 <div class="container">
 
       <form class="form-signin" ng-submit="login()">
-        <h2 class="form-signin-heading">Please login</h2>
-        <div class="input-group">
+        <h2 class="form-signin-heading">Please login</h2>        
+        <div class="form-group">
 	        <label for="inputUsername" class="sr-only">Username</label>
 	        <input type="text" id="inputUsername" ng-model="user" class="form-control" placeholder="Username" required autofocus>
         </div>
-        <div class="input-group">
+        <div class="form-group">
 	        <label for="inputPassword" class="sr-only">Password</label>
 	        <input type="password" id="inputPassword" ng-model="pass" class="form-control" placeholder="Password" required>
         </div>
         <div class="input-group">
         	<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>        	
+    	</div>
       </form>
 
 </div> <!-- /container -->

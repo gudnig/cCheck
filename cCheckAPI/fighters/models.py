@@ -16,7 +16,8 @@ class Fighter(models.Model):
 class PracticeSession(models.Model):
 	description = models.CharField(max_length=200, null=True)
 	date = models.DateField()
-	attendance = models.ManyToManyField(Fighter, related_name='attendance')
+	full_attendance = models.ManyToManyField(Fighter, related_name='full_attendance')
+	half_attendance = models.ManyToManyField(Fighter, related_name='half_attendance')
 
 #Add token to users as they are created
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)

@@ -62,8 +62,7 @@ angular.module('cCheckApp')
     function init() {      
       if ($window.sessionStorage.user) {        
         user = JSON.parse($window.sessionStorage.getItem('user'));
-        if(user){          
-          console.log(user);
+        if(user){                    
           isLoggedIn = true;
         }
       }
