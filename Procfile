@@ -1,1 +1,1 @@
-web: gunicorn cCheckAPI/cCheckAPI.wsgi --log-file -
+python cCheckAPI/manage.py runserver
