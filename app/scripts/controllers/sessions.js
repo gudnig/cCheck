@@ -21,8 +21,8 @@ angular.module('cCheckApp')
     $q.all([$scope.fighters.$promise]).then(function() {
     	$scope.fighters.forEach(function(fighter) {
     		fighter.attendance = null;
-    	})
-    })
+    	});
+    });
 
 	$scope.open = function($event) {
 		$event.preventDefault();
@@ -32,5 +32,5 @@ angular.module('cCheckApp')
 	};
 	$scope.registerSession = function()	{
 		console.log($scope.fighters);
-	}
+	};
   }]);

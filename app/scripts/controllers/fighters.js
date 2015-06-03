@@ -13,8 +13,8 @@ angular.module('cCheckApp')
 
 	/*** ADD NEW FIGHTER ***/
 	$scope.newFighter = {};
-	$scope.newFighter.status = "Nýliði";
-	$scope.newFighter.name = "";
+	$scope.newFighter.status = 'Nýliði';
+	$scope.newFighter.name = '';
 	//$scope.addUser = false; // Use when create fighter and user together
 	$scope.newFighter.user = null;
 
@@ -26,7 +26,7 @@ angular.module('cCheckApp')
 
 	$scope.addFighter = function() {
 		fighters.save($scope.newFighter);
-	}
+	};
 	/*** ADD NEW FIGHTER ***/
 
 	/*var entries = resources.fighters().query(function() {

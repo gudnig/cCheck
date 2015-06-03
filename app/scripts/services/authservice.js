@@ -43,8 +43,8 @@ angular.module('cCheckApp')
     }
 
     function logout() {
-      $window.sessionStorage.user = null      
-      user = null      
+      $window.sessionStorage.user = null;
+      user = null;
       isLoggedIn = false;      
     }
 
