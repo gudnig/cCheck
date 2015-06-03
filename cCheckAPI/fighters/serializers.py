@@ -22,11 +22,11 @@ class UserSerializer(serializers.ModelSerializer):
 		fields = ('id', 'username', 'email', 'fighter',)
 
 class FighterSerializer(serializers.ModelSerializer):
-	#user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all(), required = False)
-	user = UserMin(allow_null=True)
+	user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all(), required = False)
+	#user = UserMin(allow_null=True, required = False)
 	class Meta:
 		model = Fighter
-		fields = ( 'id', 'name', 'status', 'created', 'user' )
+		fields = ( 'id', 'name', 'status', 'created', 'user',  )
 
 class PracticeSessionSerializer(serializers.ModelSerializer):
 	half_attendance = serializers.SlugRelatedField(

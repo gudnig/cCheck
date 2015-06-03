@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
-    <!-- bower:css -->    
+    <!-- bower:css -->
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -51,13 +51,30 @@
                 <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Bardagamenn <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                   <li>
-                    <a ng-href="#/addTrainee">
-                      <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
-                      Búa til
+                    <a ng-href="#/allTrainees">
+                      <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+                      Allir
                      </a>      
                    </li>
                    <li>
                     <a ng-href="#/addTrainee">
+                      <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                      Búa til
+                     </a>      
+                   </li>             
+                </ul>
+              </li>
+              <li class="dropdown">
+                <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Mætingar <span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                  <li>
+                    <a ng-href="#/viewSession">
+                      <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+                      Skoða
+                     </a>      
+                   </li>
+                   <li>
+                    <a ng-href="#/addSession">
                       <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
                       Búa til
                      </a>      
@@ -98,7 +115,6 @@
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-touch/angular-touch.js"></script>
-    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 

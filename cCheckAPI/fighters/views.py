@@ -8,6 +8,7 @@ from rest_framework.response import Response
 from fighters.models import Fighter, PracticeSession
 from django.contrib.auth.models import User
 from fighters.serializers import FighterSerializer, PracticeSessionSerializer, UserSerializer
+from django.db.models.base import ObjectDoesNotExist 
 
 #authentication
 from rest_framework.authtoken.models import Token
@@ -23,8 +24,10 @@ class ObtainAuthToken(APIView):
 		serializer.is_valid(raise_exception=True)
 		user = serializer.validated_data['user']
 		token, created = Token.objects.get_or_create(user=user)
-		print(user.fighter)		
-		return Response({'token': token.key, 'name': user.fighter.name, 'status': user.fighter.status})
+		try:
+			return Response({'token': token.key, 'name': user.fighter.name, 'status': user.fighter.status})
+		except ObjectDoesNotExist:
+			return Response({'token': token.key })
 
 
 class GenerateTokens(APIView):

@@ -1,5 +1,5 @@
-<p>This is the addSession view.</p>
-<form>
+<h1>Skrá mætingu</h1>
+<form ng-submit="registerSession()">
 	<div class="form-group">
 		<label>Dagsetning:</label>
 		<div class="input-group">
@@ -13,8 +13,31 @@
 	<div class="form-group">
 		<label>Lýsing:</label>
 		<textarea class="form-control"></textarea>
-		<div class="input-group">
-
-		</div>
 	</div>
+	<div class="form-group">
+		<table  class="table table-condensed">
+  			<thead>
+  				<tr>
+  					<th>Nafn: <input class="form-control" type="text" ng-model="search.name" placeholder=" Leita"/></th>
+  					<th><select class="form-control" ng-options="status.filter as status.status for status in statuses"  ng-model="search.status" placeholder=" Leita eftir stöðu" ng-init="search.status = ''"></select></th>
+  					<th>Mæting</th>  					
+				</tr>
+				
+			</thead>
+			<tbody>
+				<tr ng-repeat="fighter in fighters | filter: search |  orderBy: '+name' ">
+					<td>{{fighter.name}}</td>
+					<td>{{fighter.status}}</td>
+					<td class="fit">
+						<div class="btn-group btn-group-changed">
+
+				        <label class="btn btn-default inline" ng-model="fighter.attendance" btn-radio="'Middle'" uncheckable>&#189;</label>
+				        <label class="btn btn-default inline" ng-model="fighter.attendance" btn-radio="'Right'" uncheckable>1</label>
+				    </div>
+					</td>					
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<button class="btn btn-lg btn-primary btn-block" type="submit">Skrá</button>        	
 </form>
