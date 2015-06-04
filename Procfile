@@ -1,1 +1,1 @@
-web: node web.js
+web: gunicorn cCheckAPI.wsgi --log-file -
