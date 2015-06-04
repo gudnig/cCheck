@@ -2,7 +2,6 @@ node_modules
 /cCheckAPI/fighters/migrations
 .tmp
 .sass-cache
-bower_components
 venv
 *.pyc
 *.sqlite3
