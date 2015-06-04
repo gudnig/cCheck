@@ -37,7 +37,7 @@ angular
       })
       .when('/addTrainee', {
         templateUrl: 'views/addtrainee.html',
-        controller: 'FightersCtr'
+        controller: 'FightersCtrl'
       })
       .when('/addSession', {
         templateUrl: 'views/addsession.html',
