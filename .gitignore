@@ -1,6 +1,7 @@
 node_modules
 /cCheckAPI/fighters/migrations
 .tmp
+dist
 .sass-cache
 bower_components
 venv
