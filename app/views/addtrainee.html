@@ -11,7 +11,8 @@
 		  	<label>Staða</label>
 	      	<select class="form-control" ng-model="newFighter.status" ng-options="status as status for status in statuses" required></select>
 		  </div>
-		  <button class="btn btn-lg btn-primary btn-block" type="submit">Skrá</button>        	
+		  <button class="btn btn-lg btn-primary btn-block" type="submit">Skrá  <span ng-show="load" class="glyphicon glyphicon-refresh glyphicon-spin"></span></button>
+		  <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
 		</form>
 
 </div> <!-- /container -->

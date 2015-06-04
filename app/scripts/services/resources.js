@@ -13,4 +13,7 @@ angular.module('cCheckApp')
   }])
   .factory('users', ['$resource', 'API_URL', function ($resource, API_URL) {    
       return $resource(API_URL + 'users/:id');    
+  }]) 
+  .factory('sessions', ['$resource', 'API_URL', function ($resource, API_URL) {    
+      return $resource(API_URL + 'sessions/:id');    
   }]);

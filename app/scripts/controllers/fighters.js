@@ -10,11 +10,17 @@
 angular.module('cCheckApp')
   .controller('FightersCtrl', ['$scope', 'fighters', function ($scope, fighters) {
 	$scope.statuses = ['Nýliði', 'Bardagamaður', 'Þjálfari'];
+	 $scope.alerts = []
+
+	 $scope.closeAlert = function(index) {
+	    $scope.alerts.splice(index, 1);
+	  };
 
 	/*** ADD NEW FIGHTER ***/
 	$scope.newFighter = {};
 	$scope.newFighter.status = 'Nýliði';
 	$scope.newFighter.name = '';
+	$scope.load = false;
 	//$scope.addUser = false; // Use when create fighter and user together
 	$scope.newFighter.user = null;
 
@@ -25,7 +31,26 @@ angular.module('cCheckApp')
 
 
 	$scope.addFighter = function() {
-		fighters.save($scope.newFighter);
+		$scope.alerts = []
+		var result = fighters.save($scope.newFighter);
+		$scope.load = true;
+		result.$promise.then(
+			//success
+			function(response) {
+
+				$scope.newFighter = {};
+				$scope.newFighter.status = 'Nýliði';
+				$scope.alerts.push({ type: 'success', msg: "Bardagamaður: " + response.name + " hefur verið skráður"});
+				$scope.load = false;
+			},
+			//error
+			function(response){
+				console.log(response.data);				
+				$scope.alerts.push({ type: 'danger', msg: "Villa kom upp, athugaðu villuskilaboðin og reyndu aftur: " + JSON.stringify(response.data)});
+				$scope.load = false;
+			}
+			)
+		
 	};
 	/*** ADD NEW FIGHTER ***/
 
