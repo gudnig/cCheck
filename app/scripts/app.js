@@ -39,9 +39,17 @@ angular
         templateUrl: 'views/addtrainee.html',
         controller: 'FightersCtrl'
       })
+      .when('/allTrainees', {
+        templateUrl: 'views/allfighters.html',
+        controller: 'FightersCtrl'
+      })
       .when('/addSession', {
         templateUrl: 'views/addsession.html',
-        controller: 'SessionsCtrl'
+        controller: 'AddSessionCtrl'
+      })
+      .when('/allSessions', {
+        templateUrl: 'views/allsessions.html',
+        controller: 'AllSessionsCtrl'
       })
       .otherwise({
         redirectTo: '/login'

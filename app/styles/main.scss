@@ -3,6 +3,10 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 @import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
 // endbower
 
+.btn-pseudo {
+  visibility: hidden
+}
+
 .btn-group-changed {
   white-space: nowrap;
   .btn {
