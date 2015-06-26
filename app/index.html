@@ -32,20 +32,17 @@
               <span class="icon-bar"></span>
             </button>
 
-            <a class="navbar-brand" href="#/">Rimmugýgur æfingar</a>
+            <a class="navbar-brand" href="#/">Æfingar</a>
           </div>
 
           <div class="collapse navbar-collapse" id="js-navbar-collapse">
 
-            <ul ng-show="!isTrainer()" class="nav navbar-nav">
-              <li ng-class="{ active: isActive('/')}"><a href="#/">Home</a></li>
-              <li ng-class="{ active: isActive('/about')}"><a ng-href="#/about">About</a></li>              
+            <ul class="nav navbar-nav">              
+                            
               
-            </ul>
+            
 
-             <ul ng-show="isTrainer()" class="nav navbar-nav">
-              <li ng-class="{ active: isActive('/')}"><a href="#/">Home</a></li>
-              <li ng-class="{ active: isActive('/about')}"><a ng-href="#/about">About</a></li>              
+             <div ng-show="isTrainer()" class="nav navbar-nav">                    
               </li>
               <li class="dropdown">
                 <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Bardagamenn <span class="caret"></span></a>
@@ -68,13 +65,13 @@
                 <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Mætingar <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                   <li>
-                    <a ng-href="#/allSessions">
+                    <a href="#/allSessions">
                       <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
                       Skoða
                      </a>      
                    </li>
                    <li>
-                    <a ng-href="#/addSession">
+                    <a href="#/addSession">
                       <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
                       Búa til
                      </a>      
@@ -82,11 +79,14 @@
                 </ul>
               </li>
               
+            </div>
             </ul>
 
-            <ul class="nav navbar-nav navbar-right">
-              <li ng-show="!loggedIn()"><a ng-href="#/login">Login</a></li>
-              <li ng-show="loggedIn()"><a ng-click="logout()">Logout</a></li>            
+
+            <ul ng-model="user" class="nav navbar-nav navbar-right">
+              <li ng-show="!loggedIn()"><a ng-href="#/login">Login <span class="glyphicon glyphicon-logout" aria-hidden="true"></span></a></li>
+              <li ng-show="loggedIn()"><a ng-href="#"><span>{{user.Name}}</span></a></li>
+              <li ng-show="loggedIn()"> <a ng-href="#" ng-click="logout()">Logout <span class="glyphicon glyphicon-login" ></span></a></li>           
             </ul>
           </div>
         </div>

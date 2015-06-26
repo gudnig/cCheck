@@ -6,6 +6,7 @@
   					<th><select class="form-control" ng-options="status.filter as status.status for status in filterStatus"  ng-model="search.status" placeholder=" Leita eftir stöðu" ng-init="search.status = ''"></select></th>  
   					<th></th>								
   					<th></th>		
+  					<th></th>
 				</tr>
 				
 			</thead>
@@ -13,11 +14,22 @@
 				<tr  ng-repeat="fighter in fighters | filter: search |  orderBy: '+name' ">
 					<td><input ng-disabled="!fighter.editable" class="form-control" ng-model="fighter.name" /></td>
 					<td><select ng-disabled="!fighter.editable" class="form-control" ng-model="fighter.status" ng-options="status as status for status in statuses" required></select></td>		
-					<td></td>
+					<td>
+						<div class="checkbox">
+							<label>
+								<input ng-disabled="!fighter.editable" type="checkbox" ng-model="fighter.is_trainer"> Þjálfari
+							</label>
+						</div>
+					</td>
+					<td>
+						<div class="checkbox">
+							<label>
+								<input ng-disabled="!fighter.editable" type="checkbox" ng-model="fighter.can_post_notifications"> Má tilkynna
+							</label>
+						</div>
+					</td>
 					<td>
 						<button ng-show="!fighter.editable" class="btn btn-warning" ng-click="edit(fighter)"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
-
-						<button class="btn btn-pseudo" ng-show="!fighter.editable"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
 
 						<button ng-show="fighter.editable" class="btn btn-warning" ng-click="cancel(fighter)"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
 

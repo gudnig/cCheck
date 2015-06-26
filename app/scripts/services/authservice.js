@@ -14,8 +14,8 @@ angular.module('cCheckApp')
     var isLoggedIn = false;
 
 
-    function getUser() {
-      return user;
+    function getUser() {      
+      return user;      
     }
 
     function login(username, pass) {
@@ -24,21 +24,22 @@ angular.module('cCheckApp')
       $http.post(API_URL + 'api-token-auth/', {
         username: username, 
         password: pass
-      }).then(function(response){
-        user =  {
-          Token: response.data.token,
-          Name: response.data.name,
-          Status: response.data.status
-        };
-        $window.sessionStorage.setItem('user', JSON.stringify(user));
-        isLoggedIn = true;
+      }).then(
+        // success
+        function(response){        
+          user =  response.data;
 
-        //console.log($window.sessionStorage.user); 
-        deferred.resolve(user);
-      }, 
-      function(error) {
-        deferred.reject(error);
-      });
+          // store user in case of refresh or somesuch
+          $window.sessionStorage.setItem('user', JSON.stringify(user));        
+          
+          isLoggedIn = true;
+          
+          deferred.resolve(user);
+        }, 
+        // error
+        function(error) {
+          deferred.reject(error);
+        });
       return deferred.promise;
     }
 
@@ -52,11 +53,11 @@ angular.module('cCheckApp')
       return isLoggedIn;
     }
 
-    function role() {      
+    function permissions() {      
       if(isLoggedIn) {
-        return user.Status;
+        return user.permissions;
       }
-      return 'guest';
+      return [];
     }
 
     function init() {      
@@ -71,6 +72,6 @@ angular.module('cCheckApp')
 
     // Public API here
     return {
-      login: login, getUser: getUser, logout: logout, loggedIn: loggedIn, role: role
+      login: login, getUser: getUser, logout: logout, loggedIn: loggedIn, permissions: permissions
     };
   }]);
