@@ -20,10 +20,13 @@ angular.module('cCheckApp')
 	$scope.newFighter = {};
 	$scope.newFighter.status = 'Nýliði';
 	$scope.newFighter.name = '';
+
 	$scope.newUser = {};
 	$scope.newUser.username = '';
 	$scope.newUser.password = '1234';
 	$scope.newUser.email = '';
+	$scope.newUser.groups = []
+	$scope.newUser.user_permissions = []
 	
 	$scope.load = false;
 	$scope.checkAddUser = false; // Use when create fighter and user together
@@ -52,7 +55,7 @@ angular.module('cCheckApp')
 				$scope.alerts.push({ type: 'success', msg: $scope.newFighter.status + ' ' + response.name + ' hefur verið skráður'});
 
 				if($scope.checkAddUser) {
-					$scope.newFighter.user = id;
+					$scope.newFighter.user_id = id;
 				}
 
 				$scope.load = false;				
