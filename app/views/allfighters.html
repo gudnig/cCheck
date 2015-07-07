@@ -2,7 +2,7 @@
 		<table  class="table table-condensed table-striped table-hover">
   			<thead>
   				<tr>
-  					<th><input class="form-control" type="text" ng-model="search.name" placeholder=" Leita"/></th>
+  					<th><input class="" type="text" ng-model="search.name" placeholder=" Leita"/></th>
   					<th><select class="form-control" ng-options="status.filter as status.status for status in filterStatus"  ng-model="search.status" placeholder=" Leita eftir stöðu" ng-init="search.status = ''"></select></th>  
   					<th></th>								
   					<th></th>		
@@ -12,8 +12,14 @@
 			</thead>
 			<tbody>
 				<tr  ng-repeat="fighter in fighters | filter: search |  orderBy: '+name' ">
-					<td><input ng-disabled="!fighter.editable" class="form-control" ng-model="fighter.name" /></td>
-					<td><select ng-disabled="!fighter.editable" class="form-control" ng-model="fighter.status" ng-options="status as status for status in statuses" required></select></td>		
+					<td><input ng-disabled="!fighter.editable" class="" ng-model="fighter.name" /></td>	
+					<td>
+						<div class="btn-group">
+							<label ng-model="fighter.is_newbie" btn-checkbox class="btn btn-default">Nýliði</label>
+							<label ng-model="fighter.is_fighter" btn-checkbox class="btn btn-default">Bardagamaður</label>
+							<label ng-model="fighter.is_archer" btn-checkbox class="btn btn-default">Bogamaður</label>
+						</div>
+					</td>
 					<td>
 						<div class="checkbox">
 							<label>

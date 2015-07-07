@@ -5,13 +5,13 @@
 		    <label>Nafn</label>
 	      	<input ng-model="newFighter.name" class="form-control" placeholder="Fullt nafn bardagamnns" required/> 		    
 		  </div>
-
-		  <div class="form-group">
-		  	<label>Staða</label>
-	      	<select class="form-control" ng-model="newFighter.status" ng-options="status as status for status in statuses" required></select>
+		  <div class="btn-group">
+		  	<label ng-model="newFighter.is_newbie" btn-checkbox class="btn btn-default">Nýliði</label>
+		  	<label ng-model="newFighter.is_fighter" btn-checkbox class="btn btn-default">Bardagamaður</label>
+		  	<label ng-model="newFighter.is_archer" btn-checkbox class="btn btn-default">Bogamaður</label>
 		  </div>
-		  <div ng-class="{well: checkAddUser}">
-			  <div class="form-group">
+		  <div>
+			  <div class="form-group top20">
 		  		  <input type="checkbox" ng-model="checkAddUser"> 
 				  <label>Skrá notanda</label>
 

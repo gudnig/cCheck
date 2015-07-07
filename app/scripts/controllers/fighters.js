@@ -17,9 +17,11 @@ angular.module('cCheckApp')
 	  };
 
 	/*** ADD NEW FIGHTER ***/
-	$scope.newFighter = {};
-	$scope.newFighter.status = 'Nýliði';
+	$scope.newFighter = {};	
 	$scope.newFighter.name = '';
+	$scope.newFighter.is_newbie = true;
+	$scope.newFighter.is_fighter = true;
+	$scope.newFighter.is_archer = false;
 
 	$scope.newUser = {};
 	$scope.newUser.username = '';
