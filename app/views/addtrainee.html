@@ -6,9 +6,9 @@
 	      	<input ng-model="newFighter.name" class="form-control" placeholder="Fullt nafn bardagamnns" required/> 		    
 		  </div>
 		  <div class="btn-group">
-		  	<label ng-model="newFighter.is_newbie" btn-checkbox class="btn btn-default">Nýliði</label>
-		  	<label ng-model="newFighter.is_fighter" btn-checkbox class="btn btn-default">Bardagamaður</label>
-		  	<label ng-model="newFighter.is_archer" btn-checkbox class="btn btn-default">Bogamaður</label>
+		  	<label ng-model="newFighter.is_newbie" btn-checkbox class="btn btn-default">Nýliði <span class="glyphicon glyphicon-ok-sign" ng-show="newFighter.is_newbie"></span><span class="glyphicon glyphicon-question-sign" ng-show="!newFighter.is_newbie"></span></label>
+		  	<label ng-model="newFighter.is_fighter" btn-checkbox class="btn btn-default">Bardagamaður <span class="glyphicon glyphicon-ok-sign" ng-show="newFighter.is_fighter"></span><span class="glyphicon glyphicon-question-sign" ng-show="!newFighter.is_fighter"></span></label></label>
+		  	<label ng-model="newFighter.is_archer" btn-checkbox class="btn btn-default">Bogamaður <span class="glyphicon glyphicon-ok-sign" ng-show="newFighter.is_archer"></span><span class="glyphicon glyphicon-question-sign" ng-show="!newFighter.is_archer"></span></label>
 		  </div>
 		  <div>
 			  <div class="form-group top20">

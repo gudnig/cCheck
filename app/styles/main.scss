@@ -3,9 +3,31 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 @import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
 // endbower
 
-.btn-pseudo {
-  visibility: hidden
+
+
+div.row.editable { 
+  border-top: 1px solid #e3e3e3;
+  padding-top: 5px;
+  padding-bottom: 5px;
+
+  &:hover {
+    background: #CCCC7A;
+    border: 2px solid #e3e3ff;
+  }
+  &.changeSelected {        
+    border: 2px solid #f0ad4e;
+  }
+  span {
+    &.input-group-addon {
+      width: 60px;
+    }
+    &.glyphicon {
+      width: 80px;
+    }
+  }
 }
+
+
 
 .btn-group-changed {
   white-space: nowrap;
@@ -21,6 +43,13 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 .top15 { margin-top:15px; }
 .top20 { margin-top:17px; }
 .top30 { margin-top:30px; }
+
+.bot5 {margin-bottom:5px;}
+.bot7 {margin-bottom:7px;}
+.bot10 {margin-bottom:10px;}
+.bot15 {margin-bottom:15px;}
+.bot20 {margin-bottom:20px;}
+.bot30 {margin-bottom:30px;}
 
 .browsehappy {
   margin: 0.2em 0;

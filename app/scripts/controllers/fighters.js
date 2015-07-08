@@ -12,9 +12,10 @@ angular.module('cCheckApp')
 	$scope.statuses = ['Nýliði', 'Bardagamaður', 'Bogamaður', 'Þjálfari'];
 	 $scope.alerts = [];
 
-	 $scope.closeAlert = function(index) {
-	    $scope.alerts.splice(index, 1);
-	  };
+	
+
+
+
 
 	/*** ADD NEW FIGHTER ***/
 	$scope.newFighter = {};	
@@ -98,11 +99,32 @@ angular.module('cCheckApp')
 
 	};
 	/*** ADD NEW FIGHTER ENDS ***/
-}]).controller('AllFightersCtrl', ['$scope', 'fighters', '$q', function ($scope, fighters, $q) {
+}]).controller('AllFightersCtrl', ['$scope', 'fighters', 'users', '$q', 'ngDialog', function ($scope, fighters, users, $q, ngDialog) {
 	$scope.fighters = fighters.query();
     $scope.alerts = [];    
     $scope.statuses = ['Nýliði', 'Bardagamaður', 'Bogamaður', 'Þjálfari'];
     $scope.oldFighter = {};
+
+    $scope.editUser = function (fighter) {
+    	$scope.editUserFighter = fighter;
+        ngDialog.open({ 
+        	template: '/dialog/editUser.html',
+        	scope: $scope
+    	});
+    };
+    
+
+    $scope.reset_fighter = function(fighter)
+    {
+    	fighter.name = $scope.oldFighter.name;
+    	fighter.user = $scope.oldFighter.user;
+    	fighter.is_newbie = $scope.oldFighter.is_newbie;
+    	fighter.is_archer = $scope.oldFighter.is_archer;
+    	fighter.is_fighter = $scope.oldFighter.is_fighter;
+    	fighter.is_trainer = $scope.oldFighter.is_trainer;
+    	fighter.can_post_notifications = $scope.oldFighter.can_post_notifications;
+    	fighter.editable = false;  
+    }
 
     // Give fighters editable property
     $q.all([$scope.fighters.$promise]).then(function() {
@@ -122,6 +144,7 @@ angular.module('cCheckApp')
 
       // Start edit, makes fighter editable and saves old info
       $scope.edit = function (fighter) {
+      	console.log(fighter);
   		fighter.editable = true;
 
   		// Save data in case of cancel
@@ -130,6 +153,14 @@ angular.module('cCheckApp')
 
       // Saves edits made to api, updates info, makes fighter uneditable 
       $scope.save = function (fighter) {
+/*
+      	if( (oldFighter === null && )fighter.user.email !== $scope.oldFighter.user.email || fighter.user.username !== $scope.oldFighter.user.username)
+      	{
+      		// user h as been updated so save or create new user
+      		console.log("Changing user")
+      		//users.
+      	}*/
+
       	fighters.update(fighter).$promise.then(
 			//success
 			function() {				
@@ -137,8 +168,7 @@ angular.module('cCheckApp')
 			//error
 			function(){
 				// change did not occur so reset data
-				fighter.name = $scope.oldFighter.name;
-      			fighter.status = $scope.oldFighter.status; 
+				$scope.reset_fighter(fighter);
 			}
 		);
       	fighter.editable = false;
@@ -148,8 +178,8 @@ angular.module('cCheckApp')
       $scope.cancel = function (fighter) {
       	
       	// Reset data
-      	fighter.name = $scope.oldFighter.name;
-      	fighter.status = $scope.oldFighter.status;      		      	
-      	fighter.editable = false;      	
-      };
+      	console.log($scope.oldFighter);      	
+      	$scope.reset_fighter(fighter);
+      	 	
+      };      
 }]);
