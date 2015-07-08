@@ -105,12 +105,26 @@ angular.module('cCheckApp')
     $scope.statuses = ['Nýliði', 'Bardagamaður', 'Bogamaður', 'Þjálfari'];
     $scope.oldFighter = {};
 
+    // Fetch fighters and give them editable property
+    $q.all([$scope.fighters.$promise]).then(function() {
+        $scope.fighters.forEach(function(fighter) {
+            fighter.editable = false;
+        });
+    });
+
     $scope.editUser = function (fighter) {
     	$scope.editUserFighter = fighter;
+
+    	// open popup to edit/create user
         ngDialog.open({ 
         	template: '/dialog/editUser.html',
         	scope: $scope
     	});
+    };
+
+    $scope.saveUser = function () {
+    	
+    	console.log($scope.editUserFighter);
     };
     
 
@@ -124,23 +138,13 @@ angular.module('cCheckApp')
     	fighter.is_trainer = $scope.oldFighter.is_trainer;
     	fighter.can_post_notifications = $scope.oldFighter.can_post_notifications;
     	fighter.editable = false;  
-    }
-
-    // Give fighters editable property
-    $q.all([$scope.fighters.$promise]).then(function() {
-        $scope.fighters.forEach(function(fighter) {
-            fighter.editable = false;
-        });
-    });
+    }    
 
     $scope.filterStatus = [ {status: 'Allir', filter: ''}, 
                         {status: 'Nýliðar', filter: 'Nýliði'}, 
                         {status: 'Bardagamenn', filter: 'Bardagamaður'}, 
                         {status: 'Þjálfarar', filter: 'Þjálfari'}
-                        ];
-     $scope.closeAlert = function(index) {
-        $scope.alerts.splice(index, 1);
-      };    
+                        ];     
 
       // Start edit, makes fighter editable and saves old info
       $scope.edit = function (fighter) {
