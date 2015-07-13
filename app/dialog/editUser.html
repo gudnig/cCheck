@@ -1,0 +1,15 @@
+<form role="form" ng-submit="saveUser()">
+	<div class="form-group">
+		<label>Notandanafn</label>
+		<input ng-model="editUserFighter.user.username" class="form-control" placeholder="Notandanafn fyrir innskráningu" ng-required="checkAddUser"/> 
+	</div>
+	<div class="form-group">
+		<label>Lykilorð</label>
+		<input ng-model="editUserFighter.user.password" class="form-control" placeholder="Lykilorð" ng-required="checkAddUser"/> 
+	</div>
+	<div class="form-group">
+		<label>Tölvupóstfang</label>
+		<input type="email" ng-model="editUserFighter.user.email" class="form-control" placeholder="Tölvupóstfang" ng-required="checkAddUser"/> 
+	</div>
+	<button class="btn btn-lg btn-primary btn-block" type="submit">Vista </button>
+</form>
