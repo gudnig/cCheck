@@ -89,9 +89,15 @@ angular.module('cCheckApp')
         );
     };
 }]).controller('AllSessionsCtrl', ['$scope', 'fighters', 'sessions', '$q', function ($scope, fighters, sessions, $q) {
-    $scope.sessions = sessions.query();
-    $scope.fighters = fighters.query(); 
-    $q.all([$scope.sessions.$promise, $scope.fighters.$promise]).then(function() {
+    
+    $scope.types = [ {type: 'Bogaæfingar', param: 'Bogaæfing'}, 
+                     {type: 'Bardagaæfingar', param: 'Bardagaæfing'} ];
+    $scope.current_type = "Bardagaæfing";
+
+    $scope.filterSessions = function() {
+        $scope.sessions = sessions.query({type: $scope.current_type});
+        $scope.fighters = fighters.query(); 
+        $q.all([$scope.sessions.$promise, $scope.fighters.$promise]).then(function() {
             // sort out total attendance, could probably use a better algorithm or do this in the API
             // TODO: move this functionality to the api, possibly do a join of some sort
             $scope.fighters.forEach(function(fighter) {
@@ -117,7 +123,9 @@ angular.module('cCheckApp')
         },
         // error handler, empty atm
         function() {}
-    );
+    );};
+    
+    
 }]);
 
 

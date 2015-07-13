@@ -1,3 +1,6 @@
+<select  class="form-control" ng-model="current_type" ng-options="type.param as type.type for type in types" required></select>
+<button class="btn btn-lg btn-primary btn-block" ng-click="filterSessions()">Uppfæra <span ng-show="load" class="glyphicon glyphicon-refresh glyphicon-spin"></button>   
+
 <table class="table table-condensed table-responsive texter-center">
 	<head>
 		<tr>

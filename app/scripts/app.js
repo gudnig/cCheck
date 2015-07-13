@@ -77,7 +77,7 @@ angular
       });*/
       
   }])
-  .constant('API_URL', 'https://ccheckapi.herokuapp.com/') // http://localhost:8000/ https://ccheckapi.herokuapp.com/
+  .constant('API_URL', 'http://localhost:8000/') // http://localhost:8000/ https://ccheckapi.herokuapp.com/
   .run(['$rootScope', '$location', 'authService', function($rootScope, $location, authService) {
     // Route changes settings for authentication
 
