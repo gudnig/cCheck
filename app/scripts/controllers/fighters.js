@@ -58,7 +58,7 @@ angular.module('cCheckApp')
 				$scope.alerts.push({ type: 'success', msg: $scope.newFighter.status + ' ' + response.name + ' hefur verið skráður'});
 
 				if($scope.checkAddUser) {
-					$scope.newFighter.user_id = id;
+					$scope.newFighter.user = id;
 				}
 
 				$scope.load = false;				
@@ -118,7 +118,8 @@ angular.module('cCheckApp')
     	// open popup to edit/create user
         ngDialog.open({ 
         	template: '/dialog/editUser.html',
-        	scope: $scope
+        	scope: $scope,
+        	controller: 'AllFightersCtrl'
     	});
     };
 
