@@ -149,7 +149,6 @@ angular.module('cCheckApp')
 
       // Start edit, makes fighter editable and saves old info
       $scope.edit = function (fighter) {
-      	console.log(fighter);
   		fighter.editable = true;
 
   		// Save data in case of cancel
@@ -158,17 +157,13 @@ angular.module('cCheckApp')
 
       // Saves edits made to api, updates info, makes fighter uneditable 
       $scope.save = function (fighter) {
-/*
-      	if( (oldFighter === null && )fighter.user.email !== $scope.oldFighter.user.email || fighter.user.username !== $scope.oldFighter.user.username)
-      	{
-      		// user h as been updated so save or create new user
-      		console.log("Changing user")
-      		//users.
-      	}*/
+      	var saveUser = fighter.user;
+      	fighter.user = fighter.user.id;
 
       	fighters.update(fighter).$promise.then(
 			//success
-			function() {				
+			function() {
+				fighter.user = saveUser;
 			},
 			//error
 			function(){
@@ -182,8 +177,7 @@ angular.module('cCheckApp')
       // Cancels edit, restores old info
       $scope.cancel = function (fighter) {
       	
-      	// Reset data
-      	console.log($scope.oldFighter);      	
+      	// Reset data      	
       	$scope.reset_fighter(fighter);
       	 	
       };      
