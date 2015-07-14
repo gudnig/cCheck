@@ -55,15 +55,15 @@ angular.module('cCheckApp')
 		fighters.save($scope.newFighter).$promise.then(
 			//success
 			function(response) {				
-				$scope.alerts.push({ type: 'success', msg: $scope.newFighter.status + ' ' + response.name + ' hefur verið skráður'});
+				$scope.alerts.push({ type: 'success', msg: response.name + ' hefur verið skráður'});
 
 				if($scope.checkAddUser) {
 					$scope.newFighter.user = id;
 				}
 
-				$scope.load = false;				
-				$scope.newFighter.status = 'Nýliði';
+				$scope.load = false;								
 				$scope.newFighter.name = '';
+				$scope.newFighter.user = null;
 				$scope.checkAddUser = false;
 			},
 			//error
