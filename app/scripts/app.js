@@ -137,4 +137,14 @@ angular
     $scope.isTrainer = function() {      
       return existsIn('trainer', authService.permissions());
     };
-  }]);
+  }])
+  .filter('isArcher', function() {
+    return function(input) {
+      var out = [];
+      for (var i = 0; i < input.length; i++) {
+        if(input[i].is_archer)
+          out.push(input[i])
+      }
+      return out;
+    };
+  });
