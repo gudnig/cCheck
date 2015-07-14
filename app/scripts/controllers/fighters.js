@@ -51,16 +51,14 @@ angular.module('cCheckApp')
 		}
 	};
 
-	$scope.createFighter = function(id) {		
+	$scope.createFighter = function(id) {	
+		if($scope.checkAddUser) {
+			$scope.newFighter.user = id;
+		}	
 		fighters.save($scope.newFighter).$promise.then(
 			//success
 			function(response) {				
 				$scope.alerts.push({ type: 'success', msg: response.name + ' hefur verið skráður'});
-
-				if($scope.checkAddUser) {
-					$scope.newFighter.user = id;
-				}
-
 				$scope.load = false;								
 				$scope.newFighter.name = '';
 				$scope.newFighter.user = null;
