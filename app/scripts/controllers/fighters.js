@@ -114,6 +114,11 @@ angular.module('cCheckApp')
 
     $scope.editUser = function (fighter) {
     	$scope.editUserFighter = fighter;
+    	if($scope.editUserFighter.user === null)
+    	{
+    		$scope.editUserFighter.createUser = true;
+    	}
+    	console.log($scope.editUserFighter);
 
     	// open popup to edit/create user
         ngDialog.open({ 
@@ -124,9 +129,53 @@ angular.module('cCheckApp')
     };
 
     $scope.saveUser = function () {
+
+    	if($scope.editUserFighter.createUser)
+    	{
+    		$scope.createUser();
+    	}
+    	else
+    	{
+    		$scope.updateUser();
+    	}
     	
-    	console.log($scope.editUserFighter);
     };
+
+	$scope.updateUser = function() {
+		users.edit($scope.editUserFighter.user).$promise.then(
+			//success
+			function(result) {
+				$scope.editUserFighter.user = result.id;
+				fighters.update($scope.editUserFighter).$promise.then(
+					function(result) { $scope.editUserFighter = result; console.log(result); },
+					function() {}	
+				);
+			},
+			//error
+			function(){
+				// change did not occur so reset data
+				$scope.reset_fighter($scope.editUserFighter);
+			}
+		);
+	}
+
+	$scope.createUser = function () {
+		users.save($scope.editUserFighter.user).$promise.then(
+			//success
+			function(result) {
+				$scope.editUserFighter.user = result.id;
+				fighters.update($scope.editUserFighter).$promise.then(
+					function(result) { $scope.editUserFighter = result; console.log(result); },
+					function() {}	
+				);
+			},
+			//error
+			function(){
+				// change did not occur so reset data
+				$scope.reset_fighter(fighter);
+			}
+		);
+	}
     
 
     $scope.reset_fighter = function(fighter)
@@ -157,13 +206,19 @@ angular.module('cCheckApp')
 
       // Saves edits made to api, updates info, makes fighter uneditable 
       $scope.save = function (fighter) {
-      	var saveUser = fighter.user;
-      	fighter.user = fighter.user.id;
+      	if(fighter.user !== null) {
+	      	$scope.saveUser = fighter.user;
+	      	fighter.user = fighter.user.id;
+		}
+		else {
+      		$scope.saveUser = null;
+		}
 
       	fighters.update(fighter).$promise.then(
 			//success
-			function() {
-				fighter.user = saveUser;
+			function(result) {
+				fighter = result;
+				fighter.user = $scope.saveUser;
 			},
 			//error
 			function(){
