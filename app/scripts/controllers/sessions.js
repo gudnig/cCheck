@@ -9,18 +9,46 @@
  */
 angular.module('cCheckApp')
   .controller('AddSessionCtrl', ['$scope', 'fighters', 'sessions', '$q', function ($scope, fighters, sessions, $q) {
-    $scope.statuses = [ {status: 'Allir', filter: ''}, 
-                        {status: 'Nýliðar', filter: 'Nýliði'}, 
-                        {status: 'Bardagamenn', filter: 'Bardagamaður'}, 
-                        {status: 'Bogamenn', filter: 'Bogamaður'},
-                        {status: 'Þjálfarar', filter: 'Þjálfari'}
-                        ];
+    
     $scope.types = ['Bardagaæfing', 'Bogaæfing'];
     $scope.format = 'dd.MM.yyyy';
     $scope.fighters = fighters.query();
     $scope.alerts = [];
     $scope.load = false;
     $scope.dt = new Date();
+    $scope.traineeType = 0;
+
+    // Statuses for filtering
+    $scope.statuses = [ {name: 'Allir', value: 0}, 
+                        {name: 'Nýliðar', value: 1}, 
+                        {name: 'Bardagamenn', value: 2}, 
+                        {name: 'Bogamenn', value: 3},
+                        {name: 'Þjálfarar', value: 4}
+                        ];
+
+    // Function for finding predicate for filter based on status
+    $scope.traineeFilter = function(type) {
+        if(type === 1) {
+            return function(item) {
+                return item.is_newbie;
+            };
+        }
+        else if(type === 2) {
+        return function(item) {
+                return item.is_fighter;
+            };}
+        else if(type === 3) {
+        return function(item) {
+                return item.is_archer;
+            };} 
+        else if(type === 4) {
+            return function(item) {
+                return item.is_trainer;
+            };
+        }
+        else {}
+    }
+
 
      $scope.closeAlert = function(index) {
         $scope.alerts.splice(index, 1);
@@ -90,12 +118,44 @@ angular.module('cCheckApp')
     };
 }]).controller('AllSessionsCtrl', ['$scope', 'fighters', 'sessions', '$q', function ($scope, fighters, sessions, $q) {
     
+    $scope.format = 'dd.MM.yyyy';
     $scope.types = [ {type: 'Bogaæfingar', param: 'Bogaæfing'}, 
                      {type: 'Bardagaæfingar', param: 'Bardagaæfing'} ];
     $scope.current_type = "Bardagaæfing";
 
+    // set up starting date filter
+    var today = new Date();
+    var month = today.getMonth() + 1;
+    var start_year = today.getFullYear();
+    if(month < 9)
+    {
+        start_year--;
+    }
+    var end_year = start_year + 1;
+
+    $scope.from_date = new Date(start_year, 8, 1);
+    $scope.to_date = new Date(end_year, 7, 31);    
+
+
+    $scope.open_from = function($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
+
+        $scope.opened_from = true;
+    };
+
+    $scope.open_to = function($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
+
+        $scope.opened_to = true;
+    };
+
+    $scope.sessions = [];
+    $scope.fighters = [];
+
     $scope.filterSessions = function() {
-        $scope.sessions = sessions.query({type: $scope.current_type});
+        $scope.sessions = sessions.query({type: $scope.current_type, from: $scope.from_date.toJSON().slice(0, 10), to: $scope.to_date.toJSON().slice(0, 10) });
         $scope.fighters = fighters.query(); 
         $q.all([$scope.sessions.$promise, $scope.fighters.$promise]).then(function() {
             // sort out total attendance, could probably use a better algorithm or do this in the API
